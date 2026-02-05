@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood Board 3: Urban Canvas - Bros Before Lows</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700;800;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #0A0A0A;
+      --secondary: #1A1A1A;
+      --accent: #3A86FF;
+      --coral: #FF6B6B;
+      --lavender: #C9B1FF;
+      --heart-pink: #FF4D8D;
+      --neon-green: #39FF14;
+      --white: #FFFFFF;
+      --silver: #B8B8B8;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--primary);
+      color: var(--white);
+      line-height: 1.6;
+      position: relative;
+    }
+
+    /* Noise texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* Header */
+    .header {
+      padding: 50px 40px;
+      text-align: center;
+      border-bottom: 3px solid var(--coral);
+      position: relative;
+      background: linear-gradient(180deg, var(--secondary) 0%, var(--primary) 100%);
+    }
+
+    .header::after {
+      content: '♥ ♥ ♥';
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      padding: 0 20px;
+      color: var(--heart-pink);
+      font-size: 14px;
+      letter-spacing: 8px;
+    }
+
+    .header h1 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 16px;
+      letter-spacing: 2px;
+      color: var(--neon-green);
+      margin-bottom: 12px;
+      transform: rotate(-1deg);
+    }
+
+    .header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 72px;
+      margin-bottom: 16px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--white);
+      text-shadow: 4px 4px 0 var(--coral), -2px -2px 0 var(--accent);
+    }
+
+    .header p {
+      color: var(--silver);
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto;
+      font-style: italic;
+    }
+
+    /* Section Title */
+    .section-title {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 18px;
+      color: var(--neon-green);
+      margin-bottom: 24px;
+      transform: rotate(-1deg);
+      display: inline-block;
+    }
+
+    /* Color Palette Section */
+    .palette-section {
+      padding: 60px 40px;
+      background: var(--secondary);
+    }
+
+    .palette {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .color-card {
+      flex: 1;
+      min-width: 140px;
+      background: var(--primary);
+      border: 3px solid var(--white);
+      transform: rotate(-1deg);
+      transition: transform 0.2s ease;
+    }
+
+    .color-card:nth-child(even) {
+      transform: rotate(1deg);
+    }
+
+    .color-card:hover {
+      transform: rotate(0deg) scale(1.05);
+    }
+
+    .color-swatch {
+      height: 100px;
+    }
+
+    .color-info {
+      padding: 16px;
+      border-top: 3px solid var(--white);
+    }
+
+    .color-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .color-hex {
+      font-size: 13px;
+      color: var(--silver);
+      font-family: monospace;
+    }
+
+    .color-usage {
+      font-size: 11px;
+      color: var(--coral);
+      margin-top: 8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Typography Section */
+    .typography-section {
+      padding: 60px 40px;
+      background: var(--primary);
+    }
+
+    .type-samples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 24px;
+    }
+
+    .type-sample {
+      background: var(--secondary);
+      padding: 32px;
+      border: 3px solid var(--accent);
+      position: relative;
+    }
+
+    .type-sample::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: -8px;
+      bottom: -8px;
+      background: var(--coral);
+      z-index: -1;
+    }
+
+    .type-label {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 14px;
+      color: var(--neon-green);
+      margin-bottom: 20px;
+    }
+
+    .type-h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 64px;
+      line-height: 0.9;
+      margin-bottom: 16px;
+      letter-spacing: 3px;
+    }
+
+    .type-h2 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 32px;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      color: var(--coral);
+      transform: rotate(-1deg);
+    }
+
+    .type-h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--lavender);
+    }
+
+    .type-body {
+      font-size: 18px;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .type-body-sample {
+      margin-bottom: 16px;
+    }
+
+    .type-small {
+      font-size: 14px;
+      color: var(--silver);
+    }
+
+    /* UI Components Section */
+    .components-section {
+      padding: 60px 40px;
+      background: var(--secondary);
+    }
+
+    .components-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin-top: 24px;
+    }
+
+    .component-card {
+      background: var(--primary);
+      padding: 32px;
+      border: 3px solid var(--white);
+    }
+
+    .component-label {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 14px;
+      color: var(--neon-green);
+      margin-bottom: 24px;
+    }
+
+    /* Buttons - DIY show flyer style */
+    .btn {
+      display: inline-block;
+      padding: 16px 28px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      letter-spacing: 2px;
+      text-decoration: none;
+      cursor: pointer;
+      border: 3px solid var(--white);
+      transition: all 0.15s ease;
+      margin-right: 12px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      position: relative;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      right: -4px;
+      bottom: -4px;
+      z-index: -1;
+      transition: all 0.15s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .btn-primary::after {
+      background: var(--lavender);
+    }
+
+    .btn-primary:hover {
+      transform: translate(-2px, -2px);
+    }
+
+    .btn-primary:hover::after {
+      top: 6px;
+      left: 6px;
+    }
+
+    .btn-donate {
+      background: var(--coral);
+      color: var(--white);
+    }
+
+    .btn-donate::after {
+      background: var(--heart-pink);
+    }
+
+    .btn-donate:hover {
+      transform: translate(-2px, -2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+    }
+
+    .btn-secondary::after {
+      background: var(--secondary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--white);
+      color: var(--primary);
+    }
+
+    /* Form Input */
+    .form-input {
+      width: 100%;
+      background: var(--primary);
+      border: 3px solid var(--white);
+      padding: 16px 20px;
+      color: var(--white);
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      margin-bottom: 12px;
+      transition: all 0.15s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--neon-green);
+      box-shadow: 4px 4px 0 var(--neon-green);
+    }
+
+    .form-input::placeholder {
+      color: var(--silver);
+    }
+
+    /* Cards */
+    .sample-card {
+      background: var(--secondary);
+      padding: 24px;
+      border: 3px solid var(--accent);
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .sample-card::before {
+      content: '♥';
+      position: absolute;
+      top: -10px;
+      right: 16px;
+      color: var(--heart-pink);
+      font-size: 20px;
+    }
+
+    .sample-card:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 4px 4px 0 var(--coral);
+    }
+
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .card-text {
+      color: var(--lavender);
+      font-size: 14px;
+    }
+
+    /* The Vibe Section */
+    .vibe-section {
+      padding: 80px 40px;
+      background: linear-gradient(180deg, var(--primary) 0%, #0D0D1A 100%);
+      text-align: center;
+      border-top: 3px dashed var(--coral);
+      border-bottom: 3px dashed var(--coral);
+    }
+
+    .vibe-section .section-title {
+      font-size: 24px;
+      margin-bottom: 32px;
+    }
+
+    .vibe-description {
+      font-size: 24px;
+      font-style: italic;
+      color: var(--silver);
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .vibe-description em {
+      color: var(--coral);
+      font-style: normal;
+    }
+
+    .vibe-keywords {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .vibe-keyword {
+      font-family: 'Permanent Marker', cursive;
+      padding: 12px 24px;
+      background: transparent;
+      border: 2px solid var(--lavender);
+      color: var(--lavender);
+      font-size: 16px;
+      transform: rotate(-2deg);
+    }
+
+    .vibe-keyword:nth-child(even) {
+      transform: rotate(2deg);
+      border-color: var(--coral);
+      color: var(--coral);
+    }
+
+    .vibe-keyword:nth-child(3n) {
+      border-color: var(--neon-green);
+      color: var(--neon-green);
+    }
+
+    /* Imagery Direction */
+    .imagery-section {
+      padding: 60px 40px;
+      background: var(--primary);
+    }
+
+    .imagery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 180px 180px;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .imagery-item {
+      overflow: hidden;
+      position: relative;
+      background: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--white);
+      transition: all 0.2s ease;
+    }
+
+    .imagery-item:hover {
+      transform: scale(1.02);
+      border-color: var(--neon-green);
+    }
+
+    .imagery-item.large {
+      grid-row: span 2;
+    }
+
+    .imagery-placeholder {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .imagery-placeholder .icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .imagery-placeholder p {
+      font-size: 13px;
+      color: var(--silver);
+      line-height: 1.5;
+    }
+
+    .imagery-placeholder p strong {
+      color: var(--coral);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* Design References Section */
+    .references-section {
+      padding: 60px 40px;
+      background: var(--secondary);
+    }
+
+    .references-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .reference-card {
+      background: var(--primary);
+      padding: 24px;
+      border: 3px solid var(--white);
+      text-align: center;
+      position: relative;
+    }
+
+    .reference-card::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      right: -6px;
+      bottom: -6px;
+      z-index: -1;
+    }
+
+    .reference-card:nth-child(1)::after { background: var(--coral); }
+    .reference-card:nth-child(2)::after { background: var(--accent); }
+    .reference-card:nth-child(3)::after { background: var(--lavender); }
+    .reference-card:nth-child(4)::after { background: var(--neon-green); }
+
+    .reference-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+
+    .reference-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .reference-desc {
+      font-size: 13px;
+      color: var(--silver);
+      line-height: 1.5;
+    }
+
+    /* Sample Hero Section */
+    .hero-section {
+      padding: 100px 40px;
+      text-align: center;
+      background: var(--primary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(58, 134, 255, 0.2) 0%, transparent 40%),
+        radial-gradient(ellipse at 80% 70%, rgba(255, 77, 141, 0.15) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 50%, rgba(57, 255, 20, 0.1) 0%, transparent 50%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tagline {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 18px;
+      color: var(--neon-green);
+      margin-bottom: 20px;
+      transform: rotate(-2deg);
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 96px;
+      line-height: 0.9;
+      margin-bottom: 24px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      letter-spacing: 6px;
+      text-shadow: 4px 4px 0 var(--coral);
+    }
+
+    .hero-title .heart {
+      color: var(--heart-pink);
+      display: inline-block;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--silver);
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      font-style: italic;
+    }
+
+    .crisis-banner {
+      background: var(--secondary);
+      border: 3px solid var(--coral);
+      padding: 20px 40px;
+      display: inline-block;
+      margin-top: 48px;
+      position: relative;
+    }
+
+    .crisis-banner::before {
+      content: '!!!';
+      position: absolute;
+      left: -24px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Permanent Marker', cursive;
+      color: var(--coral);
+      font-size: 20px;
+    }
+
+    .crisis-banner span {
+      color: var(--coral);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+    }
+
+    /* Footer */
+    .mood-footer {
+      padding: 40px;
+      text-align: center;
+      border-top: 3px solid var(--white);
+      background: var(--secondary);
+    }
+
+    .mood-footer p {
+      color: var(--silver);
+      font-size: 14px;
+    }
+
+    .mood-footer .hearts {
+      color: var(--heart-pink);
+      margin: 0 8px;
+    }
+
+    @media (max-width: 900px) {
+      .references-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .type-samples {
+        grid-template-columns: 1fr;
+      }
+
+      .imagery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+
+      .imagery-item.large {
+        grid-column: span 2;
+        grid-row: span 1;
+      }
+
+      .hero-title {
+        font-size: 56px;
+        letter-spacing: 2px;
+      }
+
+      .header h2 {
+        font-size: 48px;
+      }
+
+      .references-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <h1>Direction 3</h1>
+    <h2>Urban Canvas</h2>
+    <p>"The energy of a basement show at 11pm. Xeroxed flyers on telephone poles. Real connections in raw spaces."</p>
+  </header>
+
+  <!-- Color Palette -->
+  <section class="palette-section">
+    <div class="section-title">Color Palette</div>
+    <div class="palette">
+      <div class="color-card">
+        <div class="color-swatch" style="background: #0A0A0A;"></div>
+        <div class="color-info">
+          <div class="color-name">Pure Black</div>
+          <div class="color-hex">#0A0A0A</div>
+          <div class="color-usage">Backgrounds</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #3A86FF;"></div>
+        <div class="color-info">
+          <div class="color-name">Electric Blue</div>
+          <div class="color-hex">#3A86FF</div>
+          <div class="color-usage">Primary CTA</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #FF6B6B;"></div>
+        <div class="color-info">
+          <div class="color-name">Neon Coral</div>
+          <div class="color-hex">#FF6B6B</div>
+          <div class="color-usage">Donate, Accents</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #FF4D8D;"></div>
+        <div class="color-info">
+          <div class="color-name">Heart Pink</div>
+          <div class="color-hex">#FF4D8D</div>
+          <div class="color-usage">Hearts, Love</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #39FF14;"></div>
+        <div class="color-info">
+          <div class="color-name">Neon Green</div>
+          <div class="color-hex">#39FF14</div>
+          <div class="color-usage">Highlights</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #C9B1FF;"></div>
+        <div class="color-info">
+          <div class="color-name">Soft Lavender</div>
+          <div class="color-hex">#C9B1FF</div>
+          <div class="color-usage">Soft Accents</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Typography -->
+  <section class="typography-section">
+    <div class="section-title">Typography</div>
+    <div class="type-samples">
+      <div class="type-sample">
+        <div class="type-label">Headlines — Bebas Neue</div>
+        <div class="type-h1">SPEAK UP</div>
+        <div class="type-h2">Break The Silence</div>
+        <div class="type-h3">Your Voice Matters</div>
+      </div>
+      <div class="type-sample">
+        <div class="type-label">Body — Outfit + Permanent Marker</div>
+        <div class="type-body type-body-sample">
+          Bros Before Lows creates raw, real spaces where men can break through the noise and find genuine connection. No judgment. No pretense. Just showing up.
+        </div>
+        <div class="type-body type-small">
+          Join a movement of men across the GTA who are rewriting what strength looks like.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UI Components -->
+  <section class="components-section">
+    <div class="section-title">UI Components</div>
+    <div class="components-grid">
+      <div class="component-card">
+        <div class="component-label">Buttons</div>
+        <button class="btn btn-primary">Find a Group</button>
+        <button class="btn btn-donate">Donate ♥</button>
+        <button class="btn btn-secondary">Learn More</button>
+      </div>
+      <div class="component-card">
+        <div class="component-label">Form Input</div>
+        <input type="text" class="form-input" placeholder="Your name">
+        <input type="email" class="form-input" placeholder="Email address">
+      </div>
+      <div class="component-card">
+        <div class="component-label">Card</div>
+        <div class="sample-card">
+          <div class="card-title">Toronto Underground</div>
+          <div class="card-text">Wednesdays @ 7pm • Queen West</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Vibe Section -->
+  <section class="vibe-section">
+    <div class="section-title">The Vibe</div>
+    <p class="vibe-description">
+      Think <em>basement show energy</em> — raw, loud, real. Xeroxed flyers stapled to telephone poles.
+      The feeling of finding your people in an unexpected place. <em>All-ages shows</em> where everyone belongs.
+      Street art that speaks truth. The 2am conversation that changes everything.
+    </p>
+    <div class="vibe-keywords">
+      <span class="vibe-keyword">Raw</span>
+      <span class="vibe-keyword">Underground</span>
+      <span class="vibe-keyword">Real Talk</span>
+      <span class="vibe-keyword">DIY Spirit</span>
+      <span class="vibe-keyword">Street Level</span>
+      <span class="vibe-keyword">All Ages</span>
+    </div>
+  </section>
+
+  <!-- Imagery Direction -->
+  <section class="imagery-section">
+    <div class="section-title">Imagery Direction</div>
+    <div class="imagery-grid">
+      <div class="imagery-item large">
+        <div class="imagery-placeholder">
+          <div class="icon">🎤</div>
+          <p><strong>Basement Shows</strong>Small venues, real crowds,<br>sweaty walls, pure energy</p>
+        </div>
+      </div>
+      <div class="imagery-item">
+        <div class="imagery-placeholder">
+          <div class="icon">🎨</div>
+          <p><strong>Street Art</strong>Murals, wheat paste,<br>urban expression</p>
+        </div>
+      </div>
+      <div class="imagery-item">
+        <div class="imagery-placeholder">
+          <div class="icon">📋</div>
+          <p><strong>Zines & Flyers</strong>Xeroxed, hand-drawn,<br>DIY aesthetic</p>
+        </div>
+      </div>
+      <div class="imagery-item">
+        <div class="imagery-placeholder">
+          <div class="icon">🌃</div>
+          <p><strong>Night Toronto</strong>Neon lights, late nights,<br>urban landscape</p>
+        </div>
+      </div>
+      <div class="imagery-item">
+        <div class="imagery-placeholder">
+          <div class="icon">👊</div>
+          <p><strong>Real Moments</strong>Candid, unposed,<br>genuine connection</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Design References -->
+  <section class="references-section">
+    <div class="section-title">Design References</div>
+    <div class="references-grid">
+      <div class="reference-card">
+        <div class="reference-icon">📎</div>
+        <div class="reference-title">Show Flyers</div>
+        <div class="reference-desc">Photocopied punk/hardcore flyers, bold type, cut-and-paste aesthetic</div>
+      </div>
+      <div class="reference-card">
+        <div class="reference-icon">🏚️</div>
+        <div class="reference-title">DIY Venues</div>
+        <div class="reference-desc">Warehouse parties, community spaces, all-ages shows</div>
+      </div>
+      <div class="reference-card">
+        <div class="reference-icon">📰</div>
+        <div class="reference-title">Zine Culture</div>
+        <div class="reference-desc">Hand-stapled publications, personal stories, underground press</div>
+      </div>
+      <div class="reference-card">
+        <div class="reference-icon">🎭</div>
+        <div class="reference-title">Street Culture</div>
+        <div class="reference-desc">Graffiti, skateboarding, urban art, authentic expression</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sample Hero -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-tagline">Men's Mental Health Movement</div>
+      <h1 class="hero-title">BROS <span class="heart">♥</span> BEFORE LOWS</h1>
+      <p class="hero-subtitle">Real talk. Real support. Real change. Find your people in the GTA.</p>
+      <button class="btn btn-primary" style="margin-right: 16px;">FIND A GROUP</button>
+      <button class="btn btn-donate">SUPPORT US ♥</button>
+      <div class="crisis-banner">
+        <span>CRISIS?</span> Call 988 (Canada) or 911
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mood-footer">
+    <p>Mood Board: Urban Canvas <span class="hearts">♥ ♥ ♥</span> Bros Before Lows Website Redesign</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visual Direction Options - Bros Before Lows</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #0A0A0A;
+      color: #fff;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Noise texture */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .header {
+      text-align: center;
+      padding: 60px 40px;
+      border-bottom: 3px solid #E91E8C;
+      position: relative;
+      background: linear-gradient(180deg, #1A1A1A 0%, #0A0A0A 100%);
+    }
+
+    .header::after {
+      content: '♥ ♥ ♥';
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0A0A0A;
+      padding: 0 20px;
+      color: #E91E8C;
+      font-size: 16px;
+      letter-spacing: 10px;
+    }
+
+    .header h1 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 18px;
+      letter-spacing: 2px;
+      color: #E91E8C;
+      margin-bottom: 16px;
+      transform: rotate(-1deg);
+    }
+
+    .header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 56px;
+      letter-spacing: 4px;
+      margin-bottom: 16px;
+      text-shadow: 3px 3px 0 #E91E8C;
+    }
+
+    .header p {
+      color: #888;
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto;
+      font-style: italic;
+    }
+
+    .directions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+    }
+
+    .direction {
+      padding: 60px 40px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      border-right: 3px solid #333;
+      position: relative;
+    }
+
+    .direction:last-child {
+      border-right: none;
+    }
+
+    .direction:hover {
+      transform: scale(1.02);
+    }
+
+    .direction-1 {
+      background: linear-gradient(180deg, #0D1B2A 0%, #1B3A4B 100%);
+    }
+
+    .direction-1:hover {
+      background: linear-gradient(180deg, #1B3A4B 0%, #0D1B2A 100%);
+    }
+
+    .direction-2 {
+      background: linear-gradient(180deg, #2D3E40 0%, #3D4E50 100%);
+    }
+
+    .direction-2:hover {
+      background: linear-gradient(180deg, #3D4E50 0%, #2D3E40 100%);
+    }
+
+    .direction-3 {
+      background: linear-gradient(180deg, #0A0A0A 0%, #1A1A1A 100%);
+    }
+
+    .direction-3:hover {
+      background: linear-gradient(180deg, #1A1A1A 0%, #0A0A0A 100%);
+    }
+
+    .direction-4 {
+      background: linear-gradient(180deg, #0F0F0F 0%, #1A1A1A 100%);
+    }
+
+    .direction-4:hover {
+      background: linear-gradient(180deg, #1A1A1A 0%, #0F0F0F 100%);
+    }
+
+    .direction-number {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 14px;
+      margin-bottom: 16px;
+      transform: rotate(-2deg);
+    }
+
+    .direction-1 .direction-number { color: #E91E8C; }
+    .direction-2 .direction-number { color: #D4A03C; }
+    .direction-3 .direction-number { color: #39FF14; }
+    .direction-4 .direction-number { color: #80ABFA; }
+
+    .direction-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .direction-1 .direction-title {
+      color: #F4F1DE;
+      text-shadow: 2px 2px 0 #9D4EDD;
+    }
+    .direction-2 .direction-title {
+      color: #FAF8F5;
+      text-shadow: 2px 2px 0 #C97C5D;
+    }
+    .direction-3 .direction-title {
+      color: #FFFFFF;
+      text-shadow: 2px 2px 0 #FF6B6B;
+    }
+    .direction-4 .direction-title {
+      color: #FFFFFF;
+      text-shadow: 2px 2px 0 #FBA7EF;
+    }
+
+    .direction-desc {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 32px;
+      font-style: italic;
+    }
+
+    .direction-1 .direction-desc { color: #8B9A9B; }
+    .direction-2 .direction-desc { color: #BEB7A4; }
+    .direction-3 .direction-desc { color: #B8B8B8; }
+    .direction-4 .direction-desc { color: #A0A0A0; }
+
+    .color-preview {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .color-dot {
+      width: 32px;
+      height: 32px;
+      border: 3px solid rgba(255,255,255,0.3);
+      transform: rotate(-3deg);
+      transition: transform 0.2s ease;
+    }
+
+    .color-dot:nth-child(even) {
+      transform: rotate(3deg);
+    }
+
+    .direction:hover .color-dot {
+      transform: rotate(0deg);
+    }
+
+    .view-btn {
+      display: inline-block;
+      padding: 16px 32px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+      border: 3px solid #fff;
+      position: relative;
+    }
+
+    .view-btn::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      right: -4px;
+      bottom: -4px;
+      z-index: -1;
+      transition: all 0.15s ease;
+    }
+
+    .direction:hover .view-btn {
+      transform: translate(-2px, -2px);
+    }
+
+    .direction:hover .view-btn::after {
+      top: 6px;
+      left: 6px;
+    }
+
+    .direction-1 .view-btn {
+      background: #41B3A3;
+      color: #0D1B2A;
+    }
+
+    .direction-1 .view-btn::after {
+      background: #E91E8C;
+    }
+
+    .direction-2 .view-btn {
+      background: #D4A03C;
+      color: #2D3E40;
+    }
+
+    .direction-2 .view-btn::after {
+      background: #C97C5D;
+    }
+
+    .direction-3 .view-btn {
+      background: #3A86FF;
+      color: #FFFFFF;
+    }
+
+    .direction-3 .view-btn::after {
+      background: #FF6B6B;
+    }
+
+    .direction-4 .view-btn {
+      background: #80ABFA;
+      color: #0F0F0F;
+    }
+
+    .direction-4 .view-btn::after {
+      background: #FBA7EF;
+    }
+
+    .keywords {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .keyword {
+      font-family: 'Permanent Marker', cursive;
+      padding: 8px 16px;
+      font-size: 13px;
+      border: 2px solid;
+      transform: rotate(-1deg);
+    }
+
+    .keyword:nth-child(even) {
+      transform: rotate(1deg);
+    }
+
+    .direction-1 .keyword {
+      border-color: #41B3A3;
+      color: #41B3A3;
+    }
+
+    .direction-2 .keyword {
+      border-color: #D4A03C;
+      color: #D4A03C;
+    }
+
+    .direction-3 .keyword {
+      border-color: #3A86FF;
+      color: #3A86FF;
+    }
+
+    .direction-4 .keyword {
+      border-color: #80ABFA;
+      color: #80ABFA;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px;
+      border-top: 3px solid #333;
+      background: #0A0A0A;
+    }
+
+    .footer p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .footer .hearts {
+      color: #E91E8C;
+      margin: 0 8px;
+    }
+
+    @media (max-width: 1024px) {
+      .directions {
+        grid-template-columns: 1fr;
+      }
+
+      .direction {
+        border-right: none;
+        border-bottom: 3px solid #333;
+      }
+
+      .direction:last-child {
+        border-bottom: none;
+      }
+
+      .header h2 {
+        font-size: 42px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <h1>Bros ♥ Before ♥ Lows</h1>
+    <h2>VISUAL DIRECTION OPTIONS</h2>
+    <p>"Three distinct approaches for the website redesign. Click each to explore the full mood board."</p>
+  </header>
+
+  <div class="directions">
+
+    <a href="midnight-brotherhood.html" class="direction direction-1">
+      <div class="direction-number">Direction 1</div>
+      <h3 class="direction-title">MIDNIGHT BROTHERHOOD</h3>
+      <p class="direction-desc">"Late-night venue energy. The quiet moment between songs. Where real talk happens."</p>
+
+      <div class="color-preview">
+        <div class="color-dot" style="background: #0D1B2A;"></div>
+        <div class="color-dot" style="background: #1B3A4B;"></div>
+        <div class="color-dot" style="background: #41B3A3;"></div>
+        <div class="color-dot" style="background: #E91E8C;"></div>
+        <div class="color-dot" style="background: #9D4EDD;"></div>
+      </div>
+
+      <span class="view-btn">View Mood Board</span>
+
+      <div class="keywords">
+        <span class="keyword">Concert Vibes</span>
+        <span class="keyword">Local Venue</span>
+        <span class="keyword">Night Energy</span>
+        <span class="keyword">Real Talk</span>
+      </div>
+    </a>
+
+    <a href="grounded-growth.html" class="direction direction-2">
+      <div class="direction-number">Direction 2</div>
+      <h3 class="direction-title">GROUNDED GROWTH</h3>
+      <p class="direction-desc">"Community coffee shop warmth. Acoustic show at your favorite spot. Where healing grows."</p>
+
+      <div class="color-preview">
+        <div class="color-dot" style="background: #2D3E40;"></div>
+        <div class="color-dot" style="background: #BEB7A4;"></div>
+        <div class="color-dot" style="background: #D4A03C;"></div>
+        <div class="color-dot" style="background: #8FA998;"></div>
+        <div class="color-dot" style="background: #C97C5D;"></div>
+      </div>
+
+      <span class="view-btn">View Mood Board</span>
+
+      <div class="keywords">
+        <span class="keyword">Community</span>
+        <span class="keyword">Acoustic</span>
+        <span class="keyword">All Ages</span>
+        <span class="keyword">Grassroots</span>
+      </div>
+    </a>
+
+    <a href="urban-canvas.html" class="direction direction-3">
+      <div class="direction-number">Direction 3</div>
+      <h3 class="direction-title">URBAN CANVAS</h3>
+      <p class="direction-desc">"Basement show at 11pm. Xeroxed flyers on telephone poles. Street culture meets real talk."</p>
+
+      <div class="color-preview">
+        <div class="color-dot" style="background: #0A0A0A;"></div>
+        <div class="color-dot" style="background: #3A86FF;"></div>
+        <div class="color-dot" style="background: #FF6B6B;"></div>
+        <div class="color-dot" style="background: #FF4D8D;"></div>
+        <div class="color-dot" style="background: #39FF14;"></div>
+      </div>
+
+      <span class="view-btn">View Mood Board</span>
+
+      <div class="keywords">
+        <span class="keyword">DIY Spirit</span>
+        <span class="keyword">Street Art</span>
+        <span class="keyword">Underground</span>
+        <span class="keyword">All Ages</span>
+      </div>
+    </a>
+
+    <a href="branded-unity.html" class="direction direction-4">
+      <div class="direction-number">Direction 4</div>
+      <h3 class="direction-title">BRANDED UNITY</h3>
+      <p class="direction-desc">"Clean, modern approach. Dark foundation with BBL brand colors as accents."</p>
+
+      <div class="color-preview">
+        <div class="color-dot" style="background: #FAF8F5;"></div>
+        <div class="color-dot" style="background: #1A1A1A;"></div>
+        <div class="color-dot" style="background: #80ABFA;"></div>
+        <div class="color-dot" style="background: #FBA7EF;"></div>
+        <div class="color-dot" style="background: #22C55E;"></div>
+      </div>
+
+      <span class="view-btn">View Mood Board</span>
+
+      <div class="keywords">
+        <span class="keyword">Brand Colors</span>
+        <span class="keyword">Warm + Dark</span>
+        <span class="keyword">Chunky</span>
+        <span class="keyword">Hybrid</span>
+      </div>
+    </a>
+
+  </div>
+
+  <footer class="footer">
+    <p>Bros Before Lows Website Redesign <span class="hearts">♥ ♥ ♥</span> Client Presentation</p>
+  </footer>
+
+</body>
+</html>

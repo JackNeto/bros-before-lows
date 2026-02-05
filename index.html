@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bros Before Lows - Men's Mental Health Movement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Rubik:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #0F0F0F;
+      --secondary: #1A1A1A;
+      --tertiary: #252525;
+      --bbl-blue: #80ABFA;
+      --bbl-pink: #FBA7EF;
+      --green-heart: #22C55E;
+      --purple-heart: #8B5CF6;
+      --text-light: #FFFFFF;
+      --text-muted: #888888;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--primary);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Grain overlay for texture */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.02;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* Navigation */
+    .nav {
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--tertiary);
+      background: var(--secondary);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      height: 50px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Rubik', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--bbl-blue);
+    }
+
+    /* Mobile Menu Toggle */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 200;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: var(--text-light);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        padding: 16px 20px;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--secondary);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+        padding: 80px 40px 40px;
+        transition: right 0.3s ease;
+        border-left: 2px solid var(--tertiary);
+        z-index: 150;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links li {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid var(--tertiary);
+      }
+
+      .nav-links li:last-child {
+        border-bottom: none;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 20px;
+        font-size: 16px;
+      }
+
+      .nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 140;
+      }
+
+      .nav-overlay.active {
+        display: block;
+      }
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 100px 40px;
+      text-align: center;
+      background: var(--primary);
+      position: relative;
+    }
+
+    .hero-logo {
+      width: 280px;
+      height: auto;
+      margin: 0 auto 40px;
+      display: block;
+    }
+
+    .hero-tagline {
+      font-family: 'Rubik', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--bbl-blue);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: 'Rubik', sans-serif;
+      font-weight: 900;
+      font-size: 72px;
+      line-height: 1.0;
+      margin-bottom: 16px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .hero-subtitle {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .hero-body {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 16px 32px;
+      border-radius: 2px;
+      font-family: 'Rubik', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-primary {
+      background: var(--text-light);
+      color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background: #E0E0E0;
+      transform: translateY(-2px);
+    }
+
+    .btn-accent {
+      background: var(--bbl-pink);
+      color: var(--primary);
+    }
+
+    .btn-accent:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-light);
+      border: 2px solid var(--text-light);
+    }
+
+    .btn-secondary:hover {
+      background: var(--text-light);
+      color: var(--primary);
+    }
+
+    .btn-blue {
+      background: var(--bbl-blue);
+      color: var(--primary);
+    }
+
+    .btn-blue:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Crisis Banner */
+    .crisis-banner {
+      background: var(--secondary);
+      border: 2px solid var(--bbl-pink);
+      padding: 12px 24px;
+      border-radius: 2px;
+      display: inline-block;
+      margin-top: 40px;
+    }
+
+    .crisis-banner span {
+      color: var(--bbl-pink);
+      font-weight: 700;
+    }
+
+    /* Section Styling */
+    .section {
+      padding: 80px 40px;
+    }
+
+    .section-dark {
+      background: var(--primary);
+    }
+
+    .section-darker {
+      background: var(--secondary);
+    }
+
+    .section-title {
+      font-family: 'Rubik', sans-serif;
+      font-size: 36px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 48px;
+    }
+
+    /* What Is BBL Section */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      border: 2px solid var(--tertiary);
+      border-radius: 2px;
+    }
+
+    .about-text h3 {
+      font-family: 'Rubik', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .about-text p {
+      font-size: 17px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+
+    .about-text .highlight {
+      color: var(--text-light);
+      font-weight: 600;
+    }
+
+    /* Focus Cards */
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .focus-card {
+      background: var(--secondary);
+      padding: 32px;
+      border-radius: 2px;
+      border: 2px solid var(--tertiary);
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .focus-card:hover {
+      border-color: var(--bbl-blue);
+      transform: translateY(-4px);
+    }
+
+    .focus-card:nth-child(even):hover {
+      border-color: var(--bbl-pink);
+    }
+
+    .focus-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--bbl-blue);
+      border-radius: 2px 0 0 2px;
+    }
+
+    .focus-card:nth-child(2)::before {
+      background: var(--bbl-pink);
+    }
+
+    .focus-card:nth-child(3)::before {
+      background: var(--green-heart);
+    }
+
+    .focus-card h4 {
+      font-family: 'Rubik', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+
+    .focus-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: var(--secondary);
+      padding: 60px 40px;
+      border-top: 2px solid var(--tertiary);
+      border-bottom: 2px solid var(--tertiary);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .stat-item {
+      padding: 20px;
+    }
+
+    .stat-number {
+      font-family: 'Rubik', sans-serif;
+      font-size: 56px;
+      font-weight: 900;
+      color: var(--bbl-blue);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-item:nth-child(2) .stat-number {
+      color: var(--bbl-pink);
+    }
+
+    .stat-item:nth-child(3) .stat-number {
+      color: var(--green-heart);
+    }
+
+    .stat-label {
+      font-family: 'Rubik', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+
+    /* Event Section */
+    .event-section {
+      background: var(--primary);
+      padding: 80px 40px;
+    }
+
+    .event-card {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--secondary);
+      border: 2px solid var(--tertiary);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .event-header {
+      background: var(--tertiary);
+      padding: 24px 32px;
+      border-bottom: 2px solid var(--bbl-pink);
+    }
+
+    .event-date {
+      font-family: 'Rubik', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--bbl-pink);
+      margin-bottom: 8px;
+    }
+
+    .event-title {
+      font-family: 'Rubik', sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .event-body {
+      padding: 32px;
+    }
+
+    .event-details {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px 20px;
+      margin-bottom: 24px;
+    }
+
+    .event-label {
+      font-family: 'Rubik', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--bbl-blue);
+    }
+
+    .event-value {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .event-description {
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .event-highlight {
+      background: var(--primary);
+      border: 2px solid var(--tertiary);
+      border-radius: 2px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .event-highlight p {
+      color: var(--text-light);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* Event Photos Gallery */
+    .event-photos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .event-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 2px solid var(--tertiary);
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .event-photo:hover {
+      border-color: var(--bbl-pink);
+      transform: scale(1.02);
+    }
+
+    @media (max-width: 600px) {
+      .event-photos {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .event-photo {
+        aspect-ratio: 16/9;
+      }
+    }
+
+    /* Mission Section */
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto 48px;
+    }
+
+    .mission-item {
+      background: var(--primary);
+      padding: 24px;
+      border-radius: 2px;
+      border: 2px solid var(--tertiary);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .mission-icon {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .mission-item:nth-child(1) .mission-icon { background: var(--bbl-blue); }
+    .mission-item:nth-child(2) .mission-icon { background: var(--bbl-pink); }
+    .mission-item:nth-child(3) .mission-icon { background: var(--green-heart); }
+    .mission-item:nth-child(4) .mission-icon { background: var(--purple-heart); }
+    .mission-item:nth-child(5) .mission-icon { background: var(--bbl-blue); }
+    .mission-item:nth-child(6) .mission-icon { background: var(--bbl-pink); }
+
+    .mission-item p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .mission-quote {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+      background: var(--primary);
+      border: 2px solid var(--bbl-pink);
+      border-radius: 2px;
+    }
+
+    .mission-quote p {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Current Focus Section */
+    .current-focus-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .current-focus-item {
+      background: var(--secondary);
+      padding: 28px;
+      border-radius: 2px;
+      border: 2px solid var(--tertiary);
+      transition: all 0.2s;
+    }
+
+    .current-focus-item:hover {
+      border-color: var(--bbl-blue);
+    }
+
+    .current-focus-item h4 {
+      font-family: 'Rubik', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--bbl-blue);
+      margin-bottom: 12px;
+    }
+
+    .current-focus-item:nth-child(2) h4 { color: var(--bbl-pink); }
+    .current-focus-item:nth-child(3) h4 { color: var(--green-heart); }
+    .current-focus-item:nth-child(4) h4 { color: var(--purple-heart); }
+
+    .current-focus-item p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      background: var(--secondary);
+      padding: 80px 40px;
+      text-align: center;
+      border-top: 2px solid var(--tertiary);
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .form-input {
+      flex: 1;
+      min-width: 250px;
+      background: var(--primary);
+      border: 2px solid var(--tertiary);
+      border-radius: 2px;
+      padding: 16px 20px;
+      color: var(--text-light);
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      transition: all 0.2s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--bbl-blue);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 60px 40px;
+      background: var(--primary);
+      border-top: 2px solid var(--tertiary);
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      max-width: 1100px;
+      margin: 0 auto 40px;
+    }
+
+    .footer-brand img {
+      width: 80px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--tertiary);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .footer-social a:hover {
+      border-color: var(--bbl-blue);
+      color: var(--bbl-blue);
+    }
+
+    .footer-links h5 {
+      font-family: 'Rubik', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--bbl-blue);
+    }
+
+    .footer-bottom {
+      border-top: 2px solid var(--tertiary);
+      padding-top: 30px;
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .footer-bottom .accent-dots {
+      display: inline-flex;
+      gap: 6px;
+      margin: 0 12px;
+    }
+
+    .footer-bottom .accent-dots span {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .about-image {
+        order: -1;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .about-text {
+        text-align: center;
+      }
+
+      .focus-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+
+      .footer-social {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 48px;
+      }
+
+      .hero-logo {
+        width: 200px;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .stat-number {
+        font-size: 42px;
+      }
+
+      .mission-grid,
+      .current-focus-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <img src="images/logo.png" alt="Bros Before Lows" class="nav-logo">
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Support Us</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="nav-overlay"></div>
+  </nav>
+
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const navOverlay = document.querySelector('.nav-overlay');
+
+    function toggleMenu() {
+      navToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      navOverlay.classList.toggle('active');
+      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+      navToggle.setAttribute('aria-expanded', navLinks.classList.contains('active'));
+    }
+
+    navToggle.addEventListener('click', toggleMenu);
+    navOverlay.addEventListener('click', toggleMenu);
+
+    // Close menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (navLinks.classList.contains('active')) {
+          toggleMenu();
+        }
+      });
+    });
+  </script>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <img src="images/hero-1.png" alt="Bros Before Lows - Brotherhood Handshake" class="hero-logo">
+    <div class="hero-tagline">Men's Mental Health Movement</div>
+    <h1 class="hero-title">BROS BEFORE LOWS</h1>
+    <p class="hero-subtitle">Where Brotherhood Meets Purpose</p>
+    <p class="hero-body">We're here to emphasize the power of positive male connection — especially during life's toughest battles. Whether it's mental health struggles, substance abuse, or unhealthy relationships, we believe that open conversations save lives.</p>
+    <div class="hero-buttons">
+      <a href="#" class="btn btn-primary">Join a Support Group</a>
+      <a href="#" class="btn btn-accent">Make a Donation</a>
+    </div>
+    <div class="crisis-banner">
+      <span>Need help now?</span> Call 9-8-8 (Canada) or 911
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">$5,950</div>
+        <div class="stat-label">Raised So Far</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">105</div>
+        <div class="stat-label">Supporters</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">$6,000</div>
+        <div class="stat-label">Goal</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What Is BBL Section -->
+  <section class="section section-dark">
+    <h2 class="section-title">What is Bros Before Lows?</h2>
+    <p class="section-subtitle">Bros Before Lows isn't just a slogan — it's a movement.</p>
+
+    <div class="about-content">
+      <div class="about-image">
+        <img src="images/hero-2.png" alt="Brotherhood">
+      </div>
+      <div class="about-text">
+        <h3>A Movement for Men's Mental Health</h3>
+        <p>It is a movement for men's mental health grounded in <span class="highlight">healing, brotherhood and purpose</span>.</p>
+        <p>We're here to emphasize the power of positive male connection — especially during life's toughest battles, whether it's mental health struggles, substance abuse, or unhealthy relationships.</p>
+        <a href="#" class="btn btn-blue">Join Us</a>
+      </div>
+    </div>
+
+    <div class="focus-grid">
+      <div class="focus-card">
+        <h4>Safe Spaces</h4>
+        <p>Safe spaces for men to be seen, heard and vulnerable. No judgment, just support.</p>
+      </div>
+      <div class="focus-card">
+        <h4>Community Driven</h4>
+        <p>Community-driven connections that foster accountability and trust between brothers.</p>
+      </div>
+      <div class="focus-card">
+        <h4>Support, Not Silence</h4>
+        <p>Environments where men can navigate life's challenges with support, not silence.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Event Section -->
+  <section class="event-section">
+    <h2 class="section-title">Upcoming Event</h2>
+    <p class="section-subtitle">Join us for a powerful night blending music with mental health advocacy.</p>
+
+    <div class="event-card">
+      <div class="event-header">
+        <div class="event-date">Saturday, August 30, 2025</div>
+        <h3 class="event-title">Talking Saves Lives</h3>
+      </div>
+      <div class="event-body">
+        <div class="event-details">
+          <span class="event-label">Venue</span>
+          <span class="event-value">Spot 1 Bar & Grill, 289 Rutherford Rd S, Brampton, ON</span>
+          <span class="event-label">Goal</span>
+          <span class="event-value">Raise $6,000 for men's peer-support work</span>
+          <span class="event-label">Featuring</span>
+          <span class="event-value">Special guest Atif Rashid, Brampton's own hip-hop artist & influencer Spitty, and local openers</span>
+        </div>
+
+        <p class="event-description">We're aiming to raise $6,000 to power our men's peer-support work — and we're doing it the best way we know how: by blending music with mental-health advocacy.</p>
+
+        <div class="event-highlight">
+          <p>Every dollar helps us host peer-led groups, community outreach, and creative healing programs — so more men can find connection, courage, and hope.</p>
+        </div>
+
+        <p class="event-description">This is a pay-what-you-can event. Limited-edition Bros Before Lows shirts — featuring our sponsors and performers — will be available for a minimum $25 donation.</p>
+
+        <div class="event-photos">
+          <img src="images/event-1.jpg" alt="Bros Before Lows Event" class="event-photo">
+          <img src="images/event-2.png" alt="Bros Before Lows Event" class="event-photo">
+          <img src="images/event-3.png" alt="Bros Before Lows Event" class="event-photo">
+        </div>
+
+        <a href="#" class="btn btn-accent">Get Tickets</a>
+        <a href="#" class="btn btn-secondary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="section section-darker">
+    <h2 class="section-title">Our Mission</h2>
+    <p class="section-subtitle">Building a world where every man feels seen, heard, and valued.</p>
+
+    <div class="mission-grid">
+      <div class="mission-item">
+        <div class="mission-icon"></div>
+        <p>Create safe, inclusive spaces where men of all ages can express themselves openly and without judgment</p>
+      </div>
+      <div class="mission-item">
+        <div class="mission-icon"></div>
+        <p>Blend music with mental health advocacy as a powerful tool for emotional expression, healing, and connection</p>
+      </div>
+      <div class="mission-item">
+        <div class="mission-icon"></div>
+        <p>Build a peer-led support network where every man feels seen, heard, and valued</p>
+      </div>
+      <div class="mission-item">
+        <div class="mission-icon"></div>
+        <p>Break the stigma surrounding men's mental health by encouraging real, vulnerable conversations</p>
+      </div>
+      <div class="mission-item">
+        <div class="mission-icon"></div>
+        <p>Promote a partnership-based approach to healing — brothers helping brothers</p>
+      </div>
+    </div>
+
+    <div class="mission-quote">
+      <p>"If you're ready to fight for your life, we're ready to fight beside you — and make sure you never have to fight alone."</p>
+    </div>
+  </section>
+
+  <!-- Current Focus Section -->
+  <section class="section section-dark">
+    <h2 class="section-title">Our Current Focus</h2>
+    <p class="section-subtitle">We're building this from the ground up — and with your support, we're ready to move fast and show up where we're needed most.</p>
+
+    <div class="current-focus-grid">
+      <div class="current-focus-item">
+        <h4>Expand Peer-Led Support Groups</h4>
+        <p>Across the GTA and beyond — making mental health support more accessible to men in every stage of life.</p>
+      </div>
+      <div class="current-focus-item">
+        <h4>Integrate Music Therapy Tools</h4>
+        <p>Into gatherings and events, using instruments, songwriting, and live performance as forms of emotional release.</p>
+      </div>
+      <div class="current-focus-item">
+        <h4>Launch the BBL Foundation</h4>
+        <p>Fundraising for the official launch of The Bros Before Lows Foundation — so we can build long-term impact, faster.</p>
+      </div>
+      <div class="current-focus-item">
+        <h4>Develop Sustainable Outreach</h4>
+        <p>To connect with young men, fathers, and those in recovery, offering creative, community-driven resources.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <h2 class="section-title">Join the Waiting List</h2>
+    <p class="section-subtitle">Be the first to know when our Peer Support Groups launch in your area.</p>
+
+    <form class="newsletter-form">
+      <input type="email" class="form-input" placeholder="Enter your email address">
+      <button type="submit" class="btn btn-primary">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Bros Before Lows">
+        <p>Bros Before Lows is a Brampton-based men's mental health initiative dedicated to reducing male suicide rates and providing accessible peer support.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="Facebook">FB</a>
+          <a href="#" aria-label="Twitter">X</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Events</a></li>
+          <li><a href="#">Support Us</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Returns & FAQ</a></li>
+          <li><a href="#">Contact Support</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>
+        &copy; 2026 Bros Before Lows
+        <span class="accent-dots">
+          <span style="background: #80ABFA;"></span>
+          <span style="background: #FBA7EF;"></span>
+          <span style="background: #22C55E;"></span>
+          <span style="background: #8B5CF6;"></span>
+        </span>
+        All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

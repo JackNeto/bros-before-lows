@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mood Board 2: Grounded Growth - Bros Before Lows</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #2d3e40;
+        --secondary: #beb7a4;
+        --accent: #d4a03c;
+        --sage: #8fa998;
+        --terracotta: #c97c5d;
+        --cream: #faf8f5;
+        --text-dark: #3d3522;
+        --heart-red: #c9584d;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--cream);
+        color: var(--text-dark);
+        line-height: 1.6;
+      }
+
+      /* Paper texture overlay */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        opacity: 0.02;
+        pointer-events: none;
+        z-index: 1000;
+      }
+
+      /* Header */
+      .header {
+        padding: 40px;
+        text-align: center;
+        border-bottom: 3px solid var(--primary);
+        background: var(--cream);
+      }
+
+      .header h1 {
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--sage);
+        margin-bottom: 8px;
+      }
+
+      .header h2 {
+        font-family: "Archivo Black", sans-serif;
+        font-size: 48px;
+        color: var(--primary);
+        margin-bottom: 16px;
+        text-transform: uppercase;
+      }
+
+      .header p {
+        color: var(--primary);
+        opacity: 0.7;
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Section styling */
+      .section-title {
+        font-family: "Caveat", cursive;
+        font-size: 32px;
+        color: var(--primary);
+        margin-bottom: 24px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title::after {
+        content: "♥";
+        margin-left: 12px;
+        color: var(--heart-red);
+      }
+
+      /* Color Palette Section */
+      .palette-section {
+        padding: 60px 40px;
+        background: var(--primary);
+      }
+
+      .palette-section .section-title {
+        color: var(--cream);
+      }
+
+      .palette {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .color-card {
+        flex: 1;
+        min-width: 140px;
+        background: var(--cream);
+        overflow: hidden;
+        transform: rotate(-1deg);
+        box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s;
+      }
+
+      .color-card:nth-child(2) {
+        transform: rotate(0.5deg);
+      }
+      .color-card:nth-child(3) {
+        transform: rotate(-0.5deg);
+      }
+      .color-card:nth-child(4) {
+        transform: rotate(1deg);
+      }
+      .color-card:nth-child(5) {
+        transform: rotate(-1deg);
+      }
+
+      .color-card:hover {
+        transform: rotate(0deg) scale(1.02);
+      }
+
+      .color-swatch {
+        height: 80px;
+      }
+
+      .color-info {
+        padding: 12px;
+      }
+
+      .color-name {
+        font-family: "Caveat", cursive;
+        font-size: 20px;
+        color: var(--text-dark);
+        margin-bottom: 2px;
+      }
+
+      .color-hex {
+        font-size: 12px;
+        color: var(--primary);
+        opacity: 0.6;
+        font-family: monospace;
+      }
+
+      .color-usage {
+        font-size: 11px;
+        color: var(--primary);
+        opacity: 0.6;
+        margin-top: 4px;
+      }
+
+      /* Typography Section */
+      .typography-section {
+        padding: 60px 40px;
+        background: var(--secondary);
+      }
+
+      .type-samples {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        margin-top: 24px;
+      }
+
+      .type-sample {
+        background: var(--cream);
+        padding: 28px;
+        box-shadow: 6px 6px 0 var(--primary);
+      }
+
+      .type-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--sage);
+        margin-bottom: 16px;
+      }
+
+      .type-archivo {
+        font-family: "Archivo Black", sans-serif;
+        text-transform: uppercase;
+        color: var(--primary);
+      }
+
+      .type-h1 {
+        font-size: 42px;
+        line-height: 1;
+        margin-bottom: 12px;
+      }
+
+      .type-h2 {
+        font-size: 28px;
+        line-height: 1.1;
+        margin-bottom: 12px;
+      }
+
+      .type-caveat {
+        font-family: "Caveat", cursive;
+        color: var(--terracotta);
+      }
+
+      .type-h3 {
+        font-size: 32px;
+        line-height: 1.2;
+      }
+
+      .type-body {
+        font-family: "DM Sans", sans-serif;
+        font-size: 17px;
+        line-height: 1.7;
+        color: var(--text-dark);
+      }
+
+      .type-body-sample {
+        margin-bottom: 12px;
+      }
+
+      .type-small {
+        font-size: 14px;
+        color: var(--primary);
+        opacity: 0.7;
+      }
+
+      /* UI Components Section */
+      .components-section {
+        padding: 60px 40px;
+        background: var(--cream);
+      }
+
+      .components-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        margin-top: 24px;
+      }
+
+      .component-card {
+        background: var(--secondary);
+        padding: 28px;
+        border: 3px solid var(--primary);
+      }
+
+      .component-label {
+        font-family: "Caveat", cursive;
+        font-size: 24px;
+        color: var(--primary);
+        margin-bottom: 20px;
+      }
+
+      /* Buttons - chunky, DIY style */
+      .btn {
+        display: inline-block;
+        padding: 14px 24px;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 700;
+        font-size: 14px;
+        text-decoration: none;
+        cursor: pointer;
+        border: 3px solid var(--primary);
+        transition: all 0.15s ease;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: var(--primary);
+        box-shadow: 4px 4px 0 var(--primary);
+      }
+
+      .btn-primary:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 var(--primary);
+      }
+
+      .btn-donate {
+        background: var(--terracotta);
+        color: var(--cream);
+        box-shadow: 4px 4px 0 var(--primary);
+      }
+
+      .btn-donate:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 var(--primary);
+      }
+
+      .btn-secondary {
+        background: var(--cream);
+        color: var(--primary);
+      }
+
+      .btn-secondary:hover {
+        background: var(--primary);
+        color: var(--cream);
+      }
+
+      /* Form Input */
+      .form-input {
+        width: 100%;
+        background: var(--cream);
+        border: 3px solid var(--primary);
+        padding: 12px 14px;
+        color: var(--text-dark);
+        font-family: "DM Sans", sans-serif;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+
+      .form-input:focus {
+        outline: none;
+        box-shadow: 4px 4px 0 var(--accent);
+      }
+
+      .form-input::placeholder {
+        color: var(--primary);
+        opacity: 0.5;
+      }
+
+      /* Cards */
+      .sample-card {
+        background: var(--cream);
+        padding: 20px;
+        border: 3px solid var(--primary);
+        box-shadow: 4px 4px 0 var(--primary);
+        position: relative;
+      }
+
+      .sample-card::before {
+        content: "♥";
+        position: absolute;
+        top: -12px;
+        right: 12px;
+        background: var(--cream);
+        padding: 0 6px;
+        color: var(--heart-red);
+        font-size: 18px;
+      }
+
+      .card-title {
+        font-family: "Archivo Black", sans-serif;
+        font-size: 16px;
+        text-transform: uppercase;
+        color: var(--primary);
+        margin-bottom: 6px;
+      }
+
+      .card-text {
+        font-family: "Caveat", cursive;
+        color: var(--terracotta);
+        font-size: 18px;
+      }
+
+      /* Vibe Section */
+      .vibe-section {
+        padding: 60px 40px;
+        background: var(--primary);
+      }
+
+      .vibe-section .section-title {
+        color: var(--cream);
+      }
+
+      .vibe-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .vibe-card {
+        background: var(--cream);
+        padding: 20px;
+        text-align: center;
+        border: 3px solid var(--secondary);
+        transition: all 0.2s;
+      }
+
+      .vibe-card:hover {
+        transform: translateY(-4px) rotate(-1deg);
+        border-color: var(--accent);
+      }
+
+      .vibe-icon {
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+
+      .vibe-title {
+        font-family: "Caveat", cursive;
+        font-size: 20px;
+        color: var(--primary);
+        margin-bottom: 4px;
+      }
+
+      .vibe-desc {
+        color: var(--primary);
+        opacity: 0.7;
+        font-size: 12px;
+      }
+
+      /* Imagery Section */
+      .imagery-section {
+        padding: 60px 40px;
+        background: var(--secondary);
+      }
+
+      .imagery-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        grid-template-rows: 160px 160px;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .imagery-item {
+        background: var(--cream);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid var(--primary);
+      }
+
+      .imagery-item.large {
+        grid-row: span 2;
+      }
+
+      .imagery-placeholder {
+        text-align: center;
+        padding: 16px;
+      }
+
+      .imagery-placeholder .icon {
+        font-size: 36px;
+        margin-bottom: 8px;
+      }
+
+      .imagery-placeholder p {
+        font-size: 13px;
+        color: var(--primary);
+        font-family: "Caveat", cursive;
+        font-size: 16px;
+      }
+
+      /* Sample Hero Section */
+      .hero-section {
+        padding: 80px 40px;
+        text-align: center;
+        background: var(--cream);
+        position: relative;
+      }
+
+      .hero-section::before {
+        content: "♥ ♥ ♥ ♥ ♥";
+        position: absolute;
+        top: 30px;
+        left: 0;
+        right: 0;
+        font-size: 20px;
+        color: var(--heart-red);
+        opacity: 0.3;
+        letter-spacing: 60px;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .hero-badge {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        border: 4px solid var(--primary);
+        border-radius: 50%;
+        background: var(--secondary);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-badge-inner {
+        font-size: 40px;
+      }
+
+      .hero-tagline {
+        font-family: "Caveat", cursive;
+        font-size: 28px;
+        color: var(--terracotta);
+        margin-bottom: 12px;
+      }
+
+      .hero-title {
+        font-family: "Archivo Black", sans-serif;
+        font-size: 52px;
+        line-height: 1;
+        color: var(--primary);
+        text-transform: uppercase;
+        margin-bottom: 16px;
+      }
+
+      .hero-hearts {
+        color: var(--heart-red);
+        font-size: 20px;
+        margin-bottom: 12px;
+      }
+
+      .hero-subtitle {
+        font-family: "Caveat", cursive;
+        font-size: 32px;
+        color: var(--sage);
+        margin-bottom: 24px;
+      }
+
+      .hero-body {
+        font-size: 17px;
+        color: var(--text-dark);
+        margin-bottom: 28px;
+        line-height: 1.7;
+      }
+
+      .crisis-banner {
+        background: var(--secondary);
+        border: 3px solid var(--terracotta);
+        padding: 12px 24px;
+        display: inline-block;
+        margin-top: 32px;
+      }
+
+      .crisis-banner span {
+        color: var(--terracotta);
+        font-weight: 700;
+      }
+
+      /* References Section */
+      .references-section {
+        padding: 60px 40px;
+        background: var(--cream);
+        border-top: 3px solid var(--primary);
+      }
+
+      .references-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 24px;
+      }
+
+      .reference-card {
+        background: var(--secondary);
+        padding: 20px;
+        border: 3px solid var(--primary);
+      }
+
+      .reference-title {
+        font-family: "Caveat", cursive;
+        font-size: 22px;
+        margin-bottom: 12px;
+        color: var(--primary);
+      }
+
+      .reference-list {
+        list-style: none;
+        font-size: 13px;
+        color: var(--text-dark);
+      }
+
+      .reference-list li {
+        margin-bottom: 6px;
+        padding-left: 18px;
+        position: relative;
+      }
+
+      .reference-list li::before {
+        content: "♥";
+        position: absolute;
+        left: 0;
+        color: var(--heart-red);
+        font-size: 10px;
+      }
+
+      /* Footer */
+      .mood-footer {
+        padding: 40px;
+        text-align: center;
+        border-top: 3px solid var(--primary);
+        background: var(--primary);
+      }
+
+      .mood-footer p {
+        color: var(--cream);
+        opacity: 0.7;
+        font-size: 14px;
+      }
+
+      @media (max-width: 768px) {
+        .type-samples,
+        .vibe-grid,
+        .references-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .imagery-grid {
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto;
+        }
+
+        .imagery-item.large {
+          grid-column: span 2;
+          grid-row: span 1;
+        }
+
+        .hero-title {
+          font-size: 36px;
+        }
+
+        .vibe-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <h1>Direction 2</h1>
+      <h2>Grounded Growth</h2>
+      <p>
+        Community center vibes. Hand-painted signs. Coffee shop conversations.
+        Grassroots movement with heart. Zine aesthetic meets mental health
+        support.
+      </p>
+    </header>
+
+    <!-- Color Palette -->
+    <section class="palette-section">
+      <div class="section-title">Color Palette</div>
+      <div class="palette">
+        <div class="color-card">
+          <div class="color-swatch" style="background: #2d3e40"></div>
+          <div class="color-info">
+            <div class="color-name">Forest Dark</div>
+            <div class="color-hex">#2D3E40</div>
+            <div class="color-usage">Headers, borders</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #beb7a4"></div>
+          <div class="color-info">
+            <div class="color-name">Warm Stone</div>
+            <div class="color-hex">#BEB7A4</div>
+            <div class="color-usage">Backgrounds</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #d4a03c"></div>
+          <div class="color-info">
+            <div class="color-name">Sunshine</div>
+            <div class="color-hex">#D4A03C</div>
+            <div class="color-usage">CTAs, highlights</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #8fa998"></div>
+          <div class="color-info">
+            <div class="color-name">Sage</div>
+            <div class="color-hex">#8FA998</div>
+            <div class="color-usage">Secondary accents</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #c9584d"></div>
+          <div class="color-info">
+            <div class="color-name">Heart Red</div>
+            <div class="color-hex">#C9584D</div>
+            <div class="color-usage">Hearts, love</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Typography -->
+    <section class="typography-section">
+      <div class="section-title">Typography</div>
+      <div class="type-samples">
+        <div class="type-sample">
+          <div class="type-label">Headlines — Archivo Black</div>
+          <div class="type-archivo type-h1">Find Your People</div>
+          <div class="type-archivo type-h2">Growing Together</div>
+          <div class="type-caveat type-h3">
+            Where brotherhood meets purpose ♥
+          </div>
+        </div>
+        <div class="type-sample">
+          <div class="type-label">Body — DM Sans + Caveat</div>
+          <div class="type-body type-body-sample">
+            Bros Before Lows creates safe, nurturing spaces where men can plant
+            seeds of healing and grow through peer support and shared
+            experience.
+          </div>
+          <div class="type-body type-small">
+            Join a community of 105+ supporters across the Greater Toronto Area.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UI Components -->
+    <section class="components-section">
+      <div class="section-title">UI Elements</div>
+      <div class="components-grid">
+        <div class="component-card">
+          <div class="component-label">Buttons</div>
+          <button class="btn btn-primary">Find a Group</button>
+          <button class="btn btn-donate">Donate ♥</button>
+          <button class="btn btn-secondary">Learn More</button>
+        </div>
+        <div class="component-card">
+          <div class="component-label">Form Input</div>
+          <input type="text" class="form-input" placeholder="Your name" />
+          <input type="email" class="form-input" placeholder="Email address" />
+        </div>
+        <div class="component-card">
+          <div class="component-label">Event Card</div>
+          <div class="sample-card">
+            <div class="card-title">Toronto Circle</div>
+            <div class="card-text">Wednesdays @ 7pm • Community Space</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vibe Section -->
+    <section class="vibe-section">
+      <div class="section-title">The Vibe</div>
+      <div class="vibe-grid">
+        <div class="vibe-card">
+          <div class="vibe-icon">☕</div>
+          <div class="vibe-title">Coffee Shop</div>
+          <div class="vibe-desc">Warm, welcoming, real talk</div>
+        </div>
+        <div class="vibe-card">
+          <div class="vibe-icon">🤲</div>
+          <div class="vibe-title">Helping Hands</div>
+          <div class="vibe-desc">Community support, not corporate</div>
+        </div>
+        <div class="vibe-card">
+          <div class="vibe-icon">📋</div>
+          <div class="vibe-title">Bulletin Board</div>
+          <div class="vibe-desc">Community center aesthetic</div>
+        </div>
+        <div class="vibe-card">
+          <div class="vibe-icon">🎸</div>
+          <div class="vibe-title">Acoustic Nights</div>
+          <div class="vibe-desc">Music in intimate settings</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Imagery Direction -->
+    <section class="imagery-section">
+      <div class="section-title">Imagery Style</div>
+      <div class="imagery-grid">
+        <div class="imagery-item large">
+          <div class="imagery-placeholder">
+            <div class="icon">🏠</div>
+            <p>
+              Community space gatherings<br />Real people, warm lighting<br />Coffee
+              shop / rec center vibes
+            </p>
+          </div>
+        </div>
+        <div class="imagery-item">
+          <div class="imagery-placeholder">
+            <div class="icon">🤝</div>
+            <p>Circle conversations<br />Men talking</p>
+          </div>
+        </div>
+        <div class="imagery-item">
+          <div class="imagery-placeholder">
+            <div class="icon">🎵</div>
+            <p>Acoustic sessions<br />Unplugged, intimate</p>
+          </div>
+        </div>
+        <div class="imagery-item">
+          <div class="imagery-placeholder">
+            <div class="icon">📝</div>
+            <p>Hand-written notes<br />Zine clippings</p>
+          </div>
+        </div>
+        <div class="imagery-item">
+          <div class="imagery-placeholder">
+            <div class="icon">🌱</div>
+            <p>Growth metaphors<br />Plants, nature</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- References Section -->
+    <section class="references-section">
+      <div class="section-title">Design References</div>
+      <div class="references-grid">
+        <div class="reference-card">
+          <div class="reference-title">Community Zines</div>
+          <ul class="reference-list">
+            <li>Hand-lettered titles</li>
+            <li>Cut-and-paste collage</li>
+            <li>Photocopied texture</li>
+            <li>Personal, authentic voice</li>
+          </ul>
+        </div>
+        <div class="reference-card">
+          <div class="reference-title">Indie Coffee Shops</div>
+          <ul class="reference-list">
+            <li>Chalkboard signs</li>
+            <li>Community bulletin boards</li>
+            <li>Local event flyers</li>
+            <li>Warm, inviting spaces</li>
+          </ul>
+        </div>
+        <div class="reference-card">
+          <div class="reference-title">Acoustic Shows</div>
+          <ul class="reference-list">
+            <li>Intimate venue energy</li>
+            <li>Unplugged, raw music</li>
+            <li>Real crowd connection</li>
+            <li>Living room concert vibes</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sample Hero -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-inner">🤝</span>
+        </div>
+        <div class="hero-tagline">A men's mental health movement</div>
+        <h1 class="hero-title">BROS BEFORE LOWS</h1>
+        <div class="hero-hearts">♥ ♥ ♥</div>
+        <p class="hero-subtitle">Where brotherhood meets purpose</p>
+        <p class="hero-body">
+          Peer support groups across the GTA where men can connect, heal, and
+          grow together. Because you don't have to figure it out alone.
+        </p>
+        <button class="btn btn-primary" style="margin-right: 12px">
+          Find Your Circle
+        </button>
+        <button class="btn btn-donate">Support Us ♥</button>
+        <div class="crisis-banner">
+          <span>Need help now?</span> Call 988 (Canada) or 911
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mood-footer">
+      <p>Mood Board: Grounded Growth • Bros Before Lows Website Redesign</p>
+    </footer>
+  </body>
+</html>
